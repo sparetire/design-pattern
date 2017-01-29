@@ -1,0 +1,27 @@
+{
+  "name": "design-pattern",
+  "version": "1.0.0",
+  "description": "Javascript design pattern",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sparetire/design-pattern.git"
+  },
+  "keywords": [
+    "design",
+    "pattern"
+  ],
+  "author": "Sparetire",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/sparetire/design-pattern/issues"
+  },
+  "homepage": "https://github.com/sparetire/design-pattern#readme",
+  "devDependencies": {
+    "babel-eslint": "^7.1.1",
+    "eslint": "^3.14.1"
+  }
+}
