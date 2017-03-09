@@ -5,6 +5,9 @@ function getSingle(constructor, time) {
 		if (!cache[className]) {
 			// 借用构造函数，逻辑运算是为了给非构造函数使用，即对于普通函数调用，可能没有返回值，也能做到多次调用只执行一次
 			cache[className] = constructor.apply(this, arguments) || true;
+			if (time) {
+				setTimeout(() => delete cache[className], time);
+			}
 		}
 		return cache[className];
 	};
@@ -25,9 +28,12 @@ let newTest = getSingle(test);
 newTest();
 newTest();
 
-const PersonProxy = getSingle(Person);
+const PersonProxy = getSingle(Person, 3000);
 
 let aaa = new PersonProxy('aaa');
-let bbb = new PersonProxy('bbb');
 console.log(aaa.name);
-console.log(bbb.name);
+
+setTimeout(() => {
+	let bbb = new PersonProxy('bbb');
+	console.log(bbb.name);
+}, 1000);
