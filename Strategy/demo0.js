@@ -43,18 +43,20 @@ Animate.prototype.start = function (propertyName, endPos, duration, easing) {
 	this.duration = duration;
 	this.easing = tween[easing];
 	let self = this;
-	let timeId = setInterval(() => {
-		if (self.step() === false) {
-			clearInterval(timeId);
+	let handler = requestAnimationFrame(function () {
+		if (self.step()) {
+			cancelAnimationFrame(handler);
+			return;
 		}
-	}, 19);
+		requestAnimationFrame(arguments.callee);
+	});
 };
 
 Animate.prototype.step = function () {
 	let t = +new Date;
 	if (t >= this.startTime + this.duration) {
 		this.update(this.endPos);
-		return false;
+		return true;
 	}
 	let pos = this.easing(t - this.startTime, this.startPos, this.endPos - this.startPos, this.duration);
 	console.log(pos);
@@ -69,5 +71,5 @@ Animate.prototype.update = function (pos) {
 window.onload = () => {
 	let ball = document.getElementsByClassName('test')[0];
 	let animation = new Animate(ball);
-	animation.start('left', 500, 1000, 'easeIn');
+	animation.start('left', 500, 1000, 'sineaseOut');
 };
