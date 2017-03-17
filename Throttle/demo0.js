@@ -1,5 +1,5 @@
 // 这种是保证一个频繁触发的函数只在最后执行一次
-function throttle(fn, delay) {
+function debounce(fn, delay) {
 	let timer = null;
 	// 1.首先，肯定是返回一个函数，参数不重要先不考虑
 	return function () {
@@ -27,6 +27,6 @@ function throttle(fn, delay) {
 	};
 }
 
-window.onresize = throttle(function (event) {
+window.onresize = debounce(function (event) {
 	console.log(event);
 }, 2000);
